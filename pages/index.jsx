@@ -6,8 +6,14 @@ export default function Home() {
   const [tweetMsg, setMsg] = useState("");
   const [tweets, setTweets] = useState([]);
   const [image, setimg] = useState("");
+  const [save, trigger] = useState(false);
+  useEffect(() => {
+    const tw = localStorage.getItem("tweets");
+    if (tw) {
+      setTweets(JSON.parse(tw));
+    }
+  }, []);
   function tweet() {
-    console.log(tweetMsg.split("\n"));
     if (tweetMsg !== "") {
       setTweets([
         ...tweets,
@@ -17,15 +23,29 @@ export default function Home() {
           img: image,
         },
       ]);
+      trigger(true);
       setMsg("");
       setimg("");
     }
   }
+  useEffect(() => {
+    if (save) {
+      localStorage.setItem("tweets", JSON.stringify(tweets));
+      console.log("saved");
+      trigger(false);
+    }
+  });
 
   function onImgChange(event) {
     if (event.target.files && event.target.files[0]) {
       let img = event.target.files[0];
-      setimg(URL.createObjectURL(img));
+      // setimg(URL.createObjectURL(img));
+      var reader = new FileReader();
+      reader.readAsDataURL(img);
+      reader.onloadend = function () {
+        var base64data = reader.result;
+        setimg(base64data);
+      };
     }
   }
   return (
