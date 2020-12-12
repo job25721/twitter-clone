@@ -8,16 +8,20 @@ export default function Home() {
   const [image, setimg] = useState("");
   const [save, trigger] = useState(false);
   useEffect(() => {
+    fetchTweets();
+  }, []);
+  function fetchTweets() {
     const tw = localStorage.getItem("tweets");
     if (tw) {
       setTweets(JSON.parse(tw));
     }
-  }, []);
+  }
   function tweet() {
     if (tweetMsg !== "") {
       setTweets([
         ...tweets,
         {
+          id: Math.floor(Math.random() * 1000),
           text: tweetMsg.split("\n"),
           time: new Date().toLocaleTimeString().substr(0, 11),
           img: image,
@@ -127,8 +131,15 @@ export default function Home() {
           </div>
         </div>
         <div className="my-3 xl:w-3/5 lg:w-3/4 md:w-3/4 sm:w-100 flex flex-col-reverse">
-          {tweets.map((msg, i) => (
-            <Tweet key={i} msg={msg.text} time={msg.time} img={msg.img} />
+          {tweets.map((msg) => (
+            <Tweet
+              key={msg.id}
+              id={msg.id}
+              msg={msg.text}
+              time={msg.time}
+              img={msg.img}
+              fetchTweets={fetchTweets}
+            />
           ))}
         </div>
       </div>

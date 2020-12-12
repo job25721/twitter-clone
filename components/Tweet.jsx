@@ -1,4 +1,11 @@
-export const Tweet = ({ msg, time, img }) => {
+export const Tweet = ({ msg, time, img, id, fetchTweets }) => {
+  function removeTweet() {
+    const tweets = JSON.parse(localStorage.getItem("tweets"));
+    const newTweets = tweets.filter((tw) => tw.id !== id);
+    localStorage.setItem("tweets", JSON.stringify(newTweets));
+    fetchTweets();
+  }
+
   return (
     <div className="my-5">
       <div className="flex">
@@ -8,12 +15,20 @@ export const Tweet = ({ msg, time, img }) => {
           className="rounded-full h-12 w-12"
         />
         <div className="pl-3">
-          <span>Pathomporn</span>
-          <span className="text-gray-300 pl-1 text-xs">@pathompxrn.p</span>
-          <span className="text-xs"> • {time}</span>
+          <div className="grid grid-cols-4">
+            <span>Pathomporn</span>
+            <span className="text-gray-300 pl-1 text-xs self-center">
+              @pathompxrn.p
+            </span>
+            <span className="text-xs self-center"> • {time}</span>
+            <button className="self-center text-red-500" onClick={removeTweet}>
+              x
+            </button>
+          </div>
           {msg.map((m, i) => (
             <p key={i}>{m}</p>
           ))}
+
           {img !== "" ? (
             <img
               src={img}
