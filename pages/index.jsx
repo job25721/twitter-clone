@@ -29,7 +29,10 @@ export default function Home() {
     }
   }
   return (
-    <div className="container px-60 mx-auto py-4 " style={{ color: "white" }}>
+    <div
+      className="container lg:px-60 px-4 mx-auto py-4 "
+      style={{ color: "white" }}
+    >
       <Head>
         <title>(20) Home / Twitter</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -50,16 +53,16 @@ export default function Home() {
           </button>
         </div>
       </div>
-      <div className="flex flex-col items-center">
+      <div className="lg:flex md:flex flex-col items-center sm:block">
         <div
-          className="shadow p-4 w-3/5 rounded-lg"
+          className="shadow p-4 xl:w-3/5 lg:w-3/4 md:w-3/4 sm:w-100 rounded-lg"
           style={{ background: "#fff" }}
         >
-          <div className="grid grid-cols-8 my-3 ">
+          <div className="grid xl:grid-cols-8 lg:gird-cols-8 md:grid-cols-8 my-3 sm:grid-cols-2 ">
             <img
               src="https://scontent.fbkk12-2.fna.fbcdn.net/v/t1.0-9/109632694_688668535322958_4102403510138700454_n.jpg?_nc_cat=104&ccb=2&_nc_sid=174925&_nc_eui2=AeG7ZaEbzxexoQZfCJSXXfb7SCrDKwY0FfJIKsMrBjQV8qxv0vGcVta2yn6QS2FYz26Jba3e5VzLMZdb8i1FiGfG&_nc_ohc=W8XerPfd1p0AX_WiPgp&_nc_ht=scontent.fbkk12-2.fna&oh=6d03833627bd7ede3bcba3932d51bbcc&oe=5FFAA495"
               alt=""
-              className="rounded-full h-12 w-12"
+              className="rounded-full w-12 h-12 xl:m-0 lg:m-0 md:m-2 m-2"
             />
             <textarea
               type="text"
@@ -81,7 +84,7 @@ export default function Home() {
               />
 
               <label
-                className="bg-blue-500 active:bg-blue-300 focus:outline-none text-white rounded-full shadow py-2 px-4"
+                className="bg-blue-500 active:bg-blue-300 focus:outline-none text-white rounded-full shadow py-2 xl:px-4 lg:px-4 md:px-4 px-2"
                 htmlFor="up"
                 style={{ cursor: "pointer" }}
               >
@@ -103,7 +106,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="my-3 w-3/5 flex flex-col-reverse">
+        <div className="my-3 xl:w-3/5 lg:w-3/4 md:w-3/4 sm:w-100 flex flex-col-reverse">
           {tweets.map((msg, i) => (
             <Tweet key={i} msg={msg.text} time={msg.time} img={msg.img} />
           ))}
