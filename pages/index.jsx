@@ -7,21 +7,21 @@ export default function Home() {
   const [tweets, setTweets] = useState([]);
   const [image, setimg] = useState("");
   const [save, trigger] = useState(false);
-  useEffect(() => {
-    fetchTweets();
-  }, []);
   function fetchTweets() {
     const tw = localStorage.getItem("tweets");
     if (tw) {
       setTweets(JSON.parse(tw));
     }
   }
+  useEffect(() => {
+    fetchTweets();
+  }, []);
   function tweet() {
     if (tweetMsg !== "") {
       setTweets([
         ...tweets,
         {
-          id: Math.floor(Math.random() * 1000),
+          id: Date.now(),
           text: tweetMsg.split("\n"),
           time: new Date().toLocaleTimeString().substr(0, 11),
           img: image,
